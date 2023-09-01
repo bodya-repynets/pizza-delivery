@@ -1,10 +1,12 @@
 "use client";
+import { addProduct, calculateSum, deleteProduct } from "@/redux/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { urlForImage } from "@/sanity/lib/image";
-import { useState } from "react";
-import { BsFillCartPlusFill } from "react-icons/bs";
+import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs";
 
 const Item = ({ item }: any) => {
-  const [size, setSize] = useState("30cm");
+  const { products } = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
   return (
     <div className="flex flex-col bg-neutral-300 w-[300px] rounded-xl shadow-xl overflow-hidden pt-[20px] items-center gap-[20px] justify-between">
       <img
@@ -33,38 +35,33 @@ const Item = ({ item }: any) => {
             })}
         </div>
       </div>
-      {item.price30cm && (
-        <div className="flex justify-center gap-[30px]">
-          <button
-            onClick={() => setSize("30cm")}
-            className={`${
-              size === "30cm" && "bg-red-700 text-white"
-            } px-[10px] rounded`}
-          >
-            30 cm
-          </button>
-          <button
-            onClick={() => setSize("40cm")}
-            className={`${
-              size === "40cm" && "bg-red-700 text-white"
-            } px-[10px] rounded`}
-          >
-            40 cm
-          </button>
-        </div>
-      )}
       <div className="flex justify-between w-full items-center">
         <p className="w-[150px] h-[50px] text-[28px] tracking-[3px] flex justify-center items-center">
           {"$ "}
-          {item.price30cm
-            ? size === "30cm"
-              ? item.price30cm
-              : item.price40cm
-            : item.price}
+          {item.price}
         </p>
-        <button className="w-[150px] h-[50px] bg-red-700 rounded-tl-xl text-white uppercase tracking-[2px] flex justify-center items-center">
-          <BsFillCartPlusFill className="w-[24px] h-[24px]" />
-        </button>
+        {products.findIndex((current) => current.product._id === item._id) !==
+        -1 ? (
+          <button
+            onClick={() => {
+              dispatch(deleteProduct(item._id));
+              dispatch(calculateSum(undefined));
+            }}
+            className="w-[150px] h-[50px] bg-slate-700 rounded-tl-xl text-white uppercase tracking-[2px] flex justify-center items-center"
+          >
+            <BsFillCartDashFill className="w-[24px] h-[24px]" />
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              dispatch(addProduct(item));
+              dispatch(calculateSum(undefined));
+            }}
+            className="w-[150px] h-[50px] bg-red-700 rounded-tl-xl text-white uppercase tracking-[2px] flex justify-center items-center"
+          >
+            <BsFillCartPlusFill className="w-[24px] h-[24px]" />
+          </button>
+        )}
       </div>
     </div>
   );

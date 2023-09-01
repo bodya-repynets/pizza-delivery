@@ -4,7 +4,6 @@ import Link from "next/link";
 export const dynamic = "force-dynamic";
 export default async function Home() {
   const items = await client.fetch(`*[_type == 'pizza']`);
-  console.log(items);
   return (
     <div className="w-[80vw] mx-auto pt-[130px] pb-[50px] flex flex-col gap-[50px]">
       <div className="flex gap-[50px] w-full justify-center flex-wrap">

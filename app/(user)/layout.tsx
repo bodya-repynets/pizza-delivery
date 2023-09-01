@@ -3,6 +3,9 @@ import "../globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Chela_One } from "next/font/google";
+import { Providers } from "@/redux/Provider";
+import Cart from "@/components/Cart";
+import Success from "@/components/Success";
 
 const chela = Chela_One({
   subsets: ["latin"],
@@ -24,10 +27,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-neutral-50">
       <body
-        className={`${chela.variable} font-chela ${inter.variable} bg-neutral-50 text-slate-700`}
+        className={`${chela.variable} font-chela ${inter.variable} bg-neutral-50 text-slate-700 relative`}
       >
-        <Navbar />
-        {children}
+        <Providers>
+          <Navbar />
+          <Success />
+          {children}
+          <Cart />
+        </Providers>
       </body>
     </html>
   );

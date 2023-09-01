@@ -3,7 +3,6 @@ import { client } from "@/sanity/lib/client";
 import Link from "next/link";
 export const dynamic = "force-dynamic";
 const CategoryPage = async ({ params }: any) => {
-  console.log(params.category);
   const items = await client.fetch(`*[_type == $categoryName]`, {
     categoryName: params.category,
   });

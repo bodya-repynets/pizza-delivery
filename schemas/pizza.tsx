@@ -8,8 +8,7 @@ export default {
       type: "string",
       title: "Name",
     },
-    { name: "price30cm", type: "string", title: "Price 30 cm" },
-    { name: "price40cm", type: "string", title: "Price 40 cm" },
+    { name: "price", type: "string", title: "Price" },
     { name: "image", type: "image" },
     {
       title: "Ingredients",
