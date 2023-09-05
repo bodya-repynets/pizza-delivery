@@ -1,10 +1,15 @@
-import { useState } from "react";
-
-const AdressInput = ({adress, name, phone, setAdress, setName, setPhone}:any) => {
-
-
+const AdressInput = ({
+  address,
+  name,
+  phone,
+  setAddress,
+  setName,
+  setPhone,
+  error,
+}: any) => {
   return (
     <div className="flex flex-col gap-[20px]">
+      {error && <p>Some of your data is invalid or empty</p>}
       <div className="relative">
         <input
           id={"name"}
@@ -59,8 +64,8 @@ const AdressInput = ({adress, name, phone, setAdress, setName, setPhone}:any) =>
       <div className="relative">
         <input
           id={"adress"}
-          value={adress}
-          onChange={(e) => setAdress(e.target.value)}
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
           type={`adress`}
           placeholder=" "
           className={`border-b-2 bg-transparent h-[50px] text-red-700 w-[250px] px-[10px] py-[13px] border-red-700 placeholder:opacity-0 peer focus:outline-none focus-within:red`}

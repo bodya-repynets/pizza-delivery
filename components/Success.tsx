@@ -1,6 +1,8 @@
 "use client";
+import { db } from "@/firebase";
+import { doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
 const Success = () => {
@@ -11,9 +13,22 @@ const Success = () => {
     document.body.style.overflow = "auto";
     router.push("/");
   };
+  const successOrder = async () => {
+    const query = new URLSearchParams(window.location.search);
+    const id = query.get("id");
+    if (id)
+      try {
+        const docRef = await updateDoc(doc(db, "orders", id), {
+          success: true,
+        });
+      } catch (e) {
+        console.error("Error updating document: ", e);
+      }
+  };
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     if (query.get("success")) {
+      successOrder();
       setShow(true);
       document.body.style.overflow = "hidden";
     }

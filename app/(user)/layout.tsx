@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Chela_One } from "next/font/google";
 import { Providers } from "@/redux/Provider";
-import Cart from "@/components/Cart";
 import Success from "@/components/Success";
 
 const chela = Chela_One({
@@ -33,7 +32,6 @@ export default function RootLayout({
           <Navbar />
           <Success />
           {children}
-          <Cart />
         </Providers>
       </body>
     </html>
