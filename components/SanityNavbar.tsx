@@ -1,13 +1,23 @@
 import Link from "next/link";
-import { BsArrowReturnLeft } from "react-icons/bs";
 const SanityNavbar = (props: any) => {
   return (
     <div>
-      <Link href={"/"} className="flex gap-[10px] items-center p-[10px]">
-        <BsArrowReturnLeft className="w-[20px] h-[20px]" />
-        <span className="font-semibold">Go to website</span>
-      </Link>
       <>{props.renderDefault(props)}</>
+      <div className="flex items-center justify-around py-[20px] border-b-[1px] border-slate-300">
+        <Link href={"/"} className="flex gap-[10px] items-center">
+          <span className="font-bold tracking-[3px] text-slate-700">
+            Go to website
+          </span>
+        </Link>
+        <button
+          onClick={() =>
+            window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+          }
+          className="font-bold tracking-[3px] text-slate-700"
+        >
+          Orders
+        </button>
+      </div>
     </div>
   );
 };

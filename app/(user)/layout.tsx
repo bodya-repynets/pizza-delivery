@@ -1,18 +1,14 @@
 import Navbar from "@/components/Navbar";
 import "../globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Chela_One } from "next/font/google";
+import { Oswald } from "next/font/google";
 import { Providers } from "@/redux/Provider";
-import Success from "@/components/Success";
-
-const chela = Chela_One({
+import Modal from "@/components/Modal";
+const oswald = Oswald({
   subsets: ["latin"],
   weight: "400",
-  variable: "--font-chela",
+  variable: "--font-oswald",
 });
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "Pizza delivery",
@@ -26,11 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-neutral-50">
       <body
-        className={`${chela.variable} font-chela ${inter.variable} bg-neutral-50 text-slate-700 relative`}
+        className={`${oswald.variable} font-oswald bg-neutral-50 text-slate-700 relative`}
       >
         <Providers>
           <Navbar />
-          <Success />
+          <Modal />
           {children}
         </Providers>
       </body>

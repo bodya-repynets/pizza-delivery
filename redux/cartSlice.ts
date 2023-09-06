@@ -1,13 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export type CartState = {
-  visible: boolean;
-  products: any[];
+  products: ProductType[];
   sum: number;
 };
 
 const initialState: CartState = {
-  visible: false,
   products: [],
   sum: 0,
 };
@@ -16,10 +14,10 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addProduct: (state, action: PayloadAction<any>) => {
+    addProduct: (state, action: PayloadAction<ItemFromSanity>) => {
       state.products.push({ product: action.payload, amount: 1 });
     },
-    deleteProduct: (state, action: PayloadAction<number>) => {
+    deleteProduct: (state, action: PayloadAction<string>) => {
       state.products = state.products.filter(
         (item) => item.product._id != action.payload
       );
@@ -39,17 +37,9 @@ const cartSlice = createSlice({
       }, 0);
       state.sum = sum;
     },
-    toggleVisibility: (state) => {
-      state.visible = !state.visible;
-    },
   },
 });
 
-export const {
-  addProduct,
-  calculateSum,
-  toggleVisibility,
-  deleteProduct,
-  changeAmount,
-} = cartSlice.actions;
+export const { addProduct, calculateSum, deleteProduct, changeAmount } =
+  cartSlice.actions;
 export default cartSlice.reducer;

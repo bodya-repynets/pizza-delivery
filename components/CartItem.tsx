@@ -14,7 +14,7 @@ const CartItem = ({ item }: any) => {
     dispatch(calculateSum(undefined));
   };
   return (
-    <div className="grid grid-cols-6 items-center justify-items-center w-full">
+    <div className="grid grid-cols-6 items-center gap-[20px] justify-items-center w-full">
       <img
         className="w-[40px] h-[40px] object-cover"
         src={urlForImage(item.product.image).url()}

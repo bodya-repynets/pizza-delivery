@@ -1,9 +1,5 @@
 "use client";
-
-import { toggleVisibility } from "@/redux/cartSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { AiOutlineClose } from "react-icons/ai";
-
+import { useAppSelector } from "@/redux/store";
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
@@ -12,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import CartItem from "@/components/CartItem";
 import AdressInput from "@/components/AdressInput";
+import { BsArrowReturnLeft } from "react-icons/bs";
+import Link from "next/link";
 export const dynamic = "force-dynamic";
 
 const Cart = () => {
@@ -21,7 +19,6 @@ const Cart = () => {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState(false);
   const { products, sum } = useAppSelector((state) => state.cart);
-  const dispatch = useAppDispatch();
   const deleteObj = async (id: string) => {
     await deleteDoc(doc(db, "orders", id));
   };
@@ -38,6 +35,16 @@ const Cart = () => {
   );
   const addOrder = async () => {
     const id = uuidv4();
+    const order = products.map((item: ProductType) => {
+      return {
+        amount: item.amount,
+        product: {
+          name: item.product.name,
+          price: item.product.price,
+          _type: item.product._type,
+        },
+      };
+    });
     try {
       await setDoc(doc(db, "orders", id), {
         name,
@@ -45,7 +52,7 @@ const Cart = () => {
         address,
         phone,
         success: false,
-        order: products,
+        order,
         fulfilied: false,
         time: new Date(),
       });
@@ -57,7 +64,6 @@ const Cart = () => {
   const handleCheckout = async () => {
     if (name && address && phone) {
       const id = await addOrder();
-      console.log(id);
       try {
         const stripe = await stripePromise;
         const response = await fetch("/api/checkout", {
@@ -67,7 +73,6 @@ const Cart = () => {
           },
           body: JSON.stringify({ products, id }),
         });
-
         const data = await response.json();
         if (!data.error) {
           if (stripe)
@@ -82,11 +87,20 @@ const Cart = () => {
       }
     } else {
       setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
     }
   };
   return (
-    <div className="flex flex-col bg-zinc-300 items-center justify-center gap-[50px] p-[80px] min-h-screen">
-      <p className="text-[20px] font-semibold">Cart:</p>
+    <div className="flex flex-col bg-zinc-300 items-center justify-center gap-[50px] px-[20px] pt-[100px] pb-[80px] min-h-screen">
+      <Link
+        href={"/"}
+        className="flex gap-[10px] items-center hover:scale-110 duration-100"
+      >
+        <BsArrowReturnLeft />
+        <span>Back to menu</span>
+      </Link>
       {products.length > 0 ? (
         <div className="flex flex-col gap-[20px] min-w-[300px]">
           {products.map((item) => {
@@ -113,7 +127,7 @@ const Cart = () => {
       {products.length > 0 && (
         <button
           onClick={handleCheckout}
-          className="w-[200px] min-h-[50px] bg-red-700 rounded text-white"
+          className="w-[200px] min-h-[50px] bg-red-700 hover:bg-red-800 rounded text-white"
         >
           Order
         </button>

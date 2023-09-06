@@ -9,7 +9,9 @@ const AdressInput = ({
 }: any) => {
   return (
     <div className="flex flex-col gap-[20px]">
-      {error && <p>Some of your data is invalid or empty</p>}
+      {error && (
+        <p className="text-red-700">Some of your data is invalid or empty</p>
+      )}
       <div className="relative">
         <input
           id={"name"}
@@ -17,7 +19,11 @@ const AdressInput = ({
           onChange={(e) => setName(e.target.value)}
           type={`name`}
           placeholder=" "
-          className={`border-b-2 bg-transparent h-[50px] text-red-700 w-[250px] px-[10px] py-[13px] border-red-700 placeholder:opacity-0 peer focus:outline-none focus-within:red`}
+          className={`border-b-2 bg-transparent h-[50px] w-[250px] px-[10px] py-[13px] ${
+            error
+              ? "border-red-700 text-red-700"
+              : "border-slate-700 text-slate-700"
+          } placeholder:opacity-0 peer focus:outline-none focus-within:red`}
         />
         <label
           htmlFor={"name"}
@@ -34,7 +40,11 @@ const AdressInput = ({
           onChange={(e) => setPhone(e.target.value)}
           type={`phone`}
           placeholder=" "
-          className={`border-b-2 bg-transparent h-[50px] text-red-700 w-[250px] px-[10px] py-[13px] border-red-700 placeholder:opacity-0 peer focus:outline-none focus-within:red`}
+          className={`border-b-2 bg-transparent h-[50px] w-[250px] px-[10px] py-[13px] ${
+            error
+              ? "border-red-700 text-red-700"
+              : "border-slate-700 text-slate-700"
+          } placeholder:opacity-0 peer focus:outline-none focus-within:red`}
         />
         <label
           htmlFor={"phone"}
@@ -51,7 +61,11 @@ const AdressInput = ({
           readOnly
           type={`City`}
           placeholder=" "
-          className={`border-b-2 bg-transparent h-[50px] text-red-700 w-[250px] px-[10px] py-[13px] border-red-700 placeholder:opacity-0 peer focus:outline-none focus-within:red`}
+          className={`border-b-2 bg-transparent h-[50px] w-[250px] px-[10px] py-[13px] ${
+            error
+              ? "border-red-700 text-red-700"
+              : "border-slate-700 text-slate-700"
+          } placeholder:opacity-0 peer focus:outline-none focus-within:red`}
         />
         <label
           htmlFor={"city"}
@@ -68,7 +82,11 @@ const AdressInput = ({
           onChange={(e) => setAddress(e.target.value)}
           type={`adress`}
           placeholder=" "
-          className={`border-b-2 bg-transparent h-[50px] text-red-700 w-[250px] px-[10px] py-[13px] border-red-700 placeholder:opacity-0 peer focus:outline-none focus-within:red`}
+          className={`border-b-2 bg-transparent h-[50px] w-[250px] px-[10px] py-[13px] ${
+            error
+              ? "border-red-700 text-red-700"
+              : "border-slate-700 text-slate-700"
+          } placeholder:opacity-0 peer focus:outline-none focus-within:red`}
         />
         <label
           htmlFor={"adress"}

@@ -14,7 +14,7 @@ const Item = ({ item }: any) => {
         src={urlForImage(item.image).url()}
         alt="pizza"
       />
-      <p className="text-[18px] tracking-[2px] uppercase px-[10px] text-center">
+      <p className="text-[20px] tracking-[2px] uppercase px-[10px] text-center">
         {item.name}
       </p>
       <div className="flex flex-col gap-[10px] items-center">
@@ -36,7 +36,7 @@ const Item = ({ item }: any) => {
         </div>
       </div>
       <div className="flex justify-between w-full items-center">
-        <p className="w-[150px] h-[50px] text-[28px] tracking-[3px] flex justify-center items-center">
+        <p className="text-[20px] tracking-[2px] flex-1 text-center">
           {"$ "}
           {item.price}
         </p>
@@ -47,7 +47,7 @@ const Item = ({ item }: any) => {
               dispatch(deleteProduct(item._id));
               dispatch(calculateSum(undefined));
             }}
-            className="w-[150px] h-[50px] bg-slate-700 rounded-tl-xl text-white uppercase tracking-[2px] flex justify-center items-center"
+            className="w-[150px] h-[50px] bg-slate-700 hover:bg-slate-800 rounded-tl-xl text-white uppercase tracking-[2px] flex justify-center items-center"
           >
             <BsFillCartDashFill className="w-[24px] h-[24px]" />
           </button>
@@ -57,7 +57,7 @@ const Item = ({ item }: any) => {
               dispatch(addProduct(item));
               dispatch(calculateSum(undefined));
             }}
-            className="w-[150px] h-[50px] bg-red-700 rounded-tl-xl text-white uppercase tracking-[2px] flex justify-center items-center"
+            className="w-[150px] h-[50px] bg-red-700 hover:bg-red-800 rounded-tl-xl text-white uppercase tracking-[2px] flex justify-center items-center"
           >
             <BsFillCartPlusFill className="w-[24px] h-[24px]" />
           </button>
