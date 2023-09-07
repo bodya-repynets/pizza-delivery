@@ -1,6 +1,6 @@
 type ItemFromSanity = {
   image: { _type: string; asset: { _ref: string; _type: string } };
-  price: string;
+  price: number;
   _rev: string;
   name: string;
   _id: string;

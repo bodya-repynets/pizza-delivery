@@ -14,6 +14,7 @@ export const dynamic = "force-dynamic";
 
 const Cart = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [address, setAddress] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -67,6 +68,7 @@ const Cart = () => {
     return id;
   };
   const handleCheckout = async () => {
+    setLoading(true);
     if (name && address && phone) {
       const id = await addOrder();
       try {
@@ -79,6 +81,7 @@ const Cart = () => {
           body: JSON.stringify({ products, id }),
         });
         const data = await response.json();
+        setLoading(false);
         if (!data.error) {
           if (stripe)
             await stripe.redirectToCheckout({
@@ -134,7 +137,7 @@ const Cart = () => {
           onClick={handleCheckout}
           className="w-[200px] min-h-[50px] bg-red-700 hover:bg-red-800 rounded text-white"
         >
-          Order
+          {loading ? "Processing..." : "Order"}
         </button>
       )}
     </div>
