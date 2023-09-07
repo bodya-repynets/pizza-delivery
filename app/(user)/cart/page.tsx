@@ -7,7 +7,7 @@ import { db } from "@/firebase";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import CartItem from "@/components/CartItem";
-import AdressInput from "@/components/AdressInput";
+import AdressInput from "@/components/UserInfoInputs";
 import { BsArrowReturnLeft } from "react-icons/bs";
 import Link from "next/link";
 export const dynamic = "force-dynamic";
@@ -30,9 +30,14 @@ const Cart = () => {
       router.push("/");
     }
   }, []);
-  const stripePromise = loadStripe(
-    "pk_test_51NXeVeGLp2MSuitNq99TUjNBQOPLsm4q0Eb571iRp9NZKG7YLCQ8agl5wBonO0sew6WUlLEG7KoQ3v98SWLSAZsK00OiVsTE4f"
-  );
+  const publicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+  if (!publicKey) {
+    throw new Error(
+      "Stripe publishable key is not defined in your environment variables."
+    );
+  }
+  const stripePromise = loadStripe(publicKey);
+
   const addOrder = async () => {
     const id = uuidv4();
     const order = products.map((item: ProductType) => {
@@ -113,7 +118,7 @@ const Cart = () => {
       {products.length > 0 && (
         <AdressInput
           name={name}
-          adress={address}
+          address={address}
           phone={phone}
           setAddress={setAddress}
           setName={setName}

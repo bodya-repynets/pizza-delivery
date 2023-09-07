@@ -3,9 +3,9 @@ import { useAppDispatch } from "@/redux/store";
 import { urlForImage } from "@/sanity/lib/image";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 
-const CartItem = ({ item }: any) => {
+const CartItem = ({ item }: CartItemPageParams) => {
   const dispatch = useAppDispatch();
-  const changeAmountHandler = (amount: number, id: number, num: number) => {
+  const changeAmountHandler = (amount: number, id: string, num: number) => {
     if (amount === 1 && num === -1) {
       dispatch(deleteProduct(id));
     } else {

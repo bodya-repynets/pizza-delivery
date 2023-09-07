@@ -14,7 +14,7 @@ const Modal = () => {
     const query = new URLSearchParams(window.location.search);
     if (query.get("success")) {
       successOrder();
-      dispatch(setModal("Thank you for order, wait for our call."));
+      dispatch(setModal("Thank you for your order, wait for our call."));
       document.body.style.overflow = "hidden";
     }
   }, []);
@@ -53,7 +53,12 @@ const Modal = () => {
         className="flex flex-col h-[200px] w-[300px] bg-zinc-300 items-center p-[20px] rounded-xl justify-center relative text-center gap-[40px]"
       >
         {message}
-        <button onClick={okay}>Ok</button>
+        <button
+          className="w-[80px] h-[40px] bg-red-700 hover:bg-red-800 text-white rounded"
+          onClick={okay}
+        >
+          Ok
+        </button>
       </div>
     </div>
   );

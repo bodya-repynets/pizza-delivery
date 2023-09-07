@@ -12,6 +12,7 @@ const CategoryPage = async ({ params }: Params) => {
         {["pizza", "salads", "burgers", "drinks"].map((item: string) => {
           return (
             <Link
+              key={item}
               href={`/${item}`}
               className={`text-[20px] uppercase hover:scale-110 duration-100 ${
                 item === params.category && "border-b-2 border-slate-700"

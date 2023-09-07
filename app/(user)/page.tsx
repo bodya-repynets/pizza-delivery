@@ -8,10 +8,11 @@ export default async function Home() {
   return (
     <div className="w-[80vw] mx-auto pt-[130px] pb-[50px] px-[20px] flex flex-col gap-[50px]">
       <div className="flex gap-[50px] w-full justify-center flex-wrap">
-        {["pizza", "salads", "burgers", "drinks"].map((item: String) => {
+        {["pizza", "salads", "burgers", "drinks"].map((item: string) => {
           return (
             <Link
               href={`/${item}`}
+              key={item}
               className={`text-[20px] uppercase hover:scale-110 duration-100 ${
                 item === "pizza" && "border-b-2 border-slate-700"
               }`}

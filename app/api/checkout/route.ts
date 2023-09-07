@@ -2,9 +2,8 @@ import { urlForImage } from "@/sanity/lib/image";
 import { NextResponse } from "next/server";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-export async function POST(req: any, res: any) {
+export async function POST(req: Request) {
   const { products, id } = await req.json();
-  console.log(id);
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],

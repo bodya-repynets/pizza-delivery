@@ -1,4 +1,4 @@
-const AdressInput = ({
+const UserInfoInputs = ({
   address,
   name,
   phone,
@@ -6,7 +6,7 @@ const AdressInput = ({
   setName,
   setPhone,
   error,
-}: any) => {
+}: InputsPageType) => {
   return (
     <div className="flex flex-col gap-[20px]">
       {error && (
@@ -30,7 +30,7 @@ const AdressInput = ({
           className={`text-xs absolute left-[8px] -top-[8px] peer-placeholder-shown:translate-y-[21px]
             peer-placeholder-shown:translate-x-[4px] text-slate-700 capitalize peer-placeholder-shown:text-base cursor-text`}
         >
-          {'Your "Name Surname"'}
+          {"Your name"}
         </label>
       </div>
       <div className="relative">
@@ -99,4 +99,4 @@ const AdressInput = ({
     </div>
   );
 };
-export default AdressInput;
+export default UserInfoInputs;

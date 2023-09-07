@@ -2,7 +2,7 @@
 import { db } from "@/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 
-const Confirm = ({ visible, setVisible, id }: any) => {
+const Confirm = ({ visible, setVisible, id }: ConfirmPageParams) => {
   const okay = async () => {
     document.body.style.overflow = "auto";
     if (id) await deleteDoc(doc(db, "orders", id));

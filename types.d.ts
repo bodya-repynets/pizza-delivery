@@ -1,5 +1,5 @@
 type ItemFromSanity = {
-  image: { _type: string; asset: object[] };
+  image: { _type: string; asset: { _ref: string; _type: string } };
   price: string;
   _rev: string;
   name: string;
@@ -34,10 +34,29 @@ type ProductType = {
   product: ItemFromSanity;
 };
 
-type ChangeAmountPayloadType={
-    
-}
+type ChangeAmountPayloadType = {};
 
 type OrderPageParams = {
   item: OrderType;
+};
+type CartItemPageParams = {
+  item: ProductType;
+};
+type ItemPageParams = {
+  item: ItemFromSanity;
+};
+type InputsPageType = {
+  address: string;
+  name: string;
+  phone: string;
+  setAddress: (newValue: string) => void;
+  setName: (newValue: string) => void;
+  setPhone: (newValue: string) => void;
+  error: boolean;
+};
+
+type ConfirmPageParams = {
+  visible: boolean;
+  id: string;
+  setVisible: (newValue: boolean) => void;
 };

@@ -1,5 +1,4 @@
-const Logo = (props: any) => {
-  const { renderDefault, title } = props;
+const Logo = () => {
   return (
     <div className="flex gap-[10px] items-center px-[20px]">
       <img

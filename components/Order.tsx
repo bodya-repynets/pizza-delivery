@@ -6,7 +6,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import Confirm from "./Confirm";
 
 const Order = ({ item }: OrderPageParams) => {
-  const [visible, setVisible] = useState<Boolean>(false);
+  const [visible, setVisible] = useState<boolean>(false);
   const fulfil = async (e: ChangeEvent<HTMLInputElement>, id: string) => {
     if (id)
       try {
@@ -24,7 +24,7 @@ const Order = ({ item }: OrderPageParams) => {
   if (item.success) {
     return (
       <div
-        className={`flex flex-col items-center gap-[10px] bg-white p-[20px] w-[250px] rounded-xl justify-between`}
+        className={`flex flex-col items-center gap-[10px] bg-white p-[20px] w-[320px] rounded-xl justify-between`}
       >
         <div className="flex justify-between w-full">
           <span className="text-[10px] text-slate-700 tracking-[2px]">
@@ -45,18 +45,34 @@ const Order = ({ item }: OrderPageParams) => {
         </p>
         <div className="flex flex-col gap-[10px] items-center">
           <p className="text-[12px] text-slate-700 tracking-[2px]">Items:</p>
-          {item.order.map((order: ProductType, index: number) => {
-            return (
-              <p
-                className="text-[12px] text-slate-700 tracking-[2px]"
-                key={order.product.name}
-              >
-                {index + 1} :{" "}
-                {order.product.name + " (" + order.product._type + ")"}, amount{" "}
-                {order.amount}
-              </p>
-            );
-          })}
+          <table className="border-[1px] w-full">
+            <tr>
+              <th className="text-[12px] border-[1px] text-center p-[10px] text-slate-700 font-semibold">
+                Name
+              </th>
+              <th className="text-[12px] border-[1px] text-center p-[10px] text-slate-700 font-semibold">
+                Category
+              </th>
+              <th className="text-[12px] border-[1px] text-center p-[10px] text-slate-700 font-semibold">
+                Amount
+              </th>
+            </tr>
+            {item.order.map((order: ProductType, index: number) => {
+              return (
+                <tr key={order.product.name}>
+                  <td className="text-[12px] text-center p-[10px] border-[1px] text-slate-700 tracking-[2px]">
+                    {order.product.name}
+                  </td>
+                  <td className="text-[12px] text-center p-[10px] border-[1px] text-slate-700 tracking-[2px]">
+                    {order.product._type}
+                  </td>
+                  <td className="text-[12px] text-center p-[10px] border-[1px] text-slate-700 tracking-[2px]">
+                    {order.amount}
+                  </td>
+                </tr>
+              );
+            })}
+          </table>
         </div>
         <div className="flex gap-[30px] mt-[10px] items-center">
           <input

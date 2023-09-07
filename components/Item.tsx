@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { urlForImage } from "@/sanity/lib/image";
 import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs";
 
-const Item = ({ item }: any) => {
+const Item = ({ item }: ItemPageParams) => {
   const { products } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   return (
